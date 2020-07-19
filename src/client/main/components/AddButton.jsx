@@ -23,12 +23,12 @@ const Icon = styled.div`
   align-self: center;
 `;
 
-export default function AddButton({ size }) {
+export default function AddButton({ size, addClick }) {
   if (!size) {
     size = "normal";
   }
   return (
-    <Wrapper size={size}>
+    <Wrapper size={size} onClick={addClick}>
       <Icon icon={plusIcon} />
     </Wrapper>
   );

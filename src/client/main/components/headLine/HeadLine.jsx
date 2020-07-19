@@ -3,6 +3,8 @@ import styled from "styled-components";
 import AviaryList from "./AviaryList";
 import Contacts from "./Contacts";
 import AddButton from "../AddButton";
+import {connect} from "react-redux";
+import {addAviaryAC} from "../../state/giraffe/actions";
 
 const Wrapper = styled.div`
   height: 60px;
@@ -25,15 +27,35 @@ const ButtonWrapper = styled.div`
   padding: 0 10px;
 `;
 
-export default function HeadLine() {
-  return (
-    <Wrapper>
-      <AviaryList />
-      <ButtonWrapper>
-        <AddButton size="small" />
-      </ButtonWrapper>
-      <Empty />
-      <Contacts />
-    </Wrapper>
-  );
-}
+const HeadLine = ({addAviary, aviaries}) => {
+
+    const handleAddAviary = () => {
+        addAviary();
+    };
+    return (
+        <Wrapper>
+            <AviaryList/>
+            <ButtonWrapper>
+                {
+                    aviaries && aviaries.length < 5 &&
+                    <AddButton size="small" addClick={handleAddAviary}/>
+                }
+            </ButtonWrapper>
+            <Empty/>
+            <Contacts/>
+        </Wrapper>
+    );
+};
+
+const mapStateToProps = state => ({
+    aviaries: state.giraffesPage.aviaries,
+});
+
+
+const mapDispatchToProps = dispatch => ({
+    addAviary: () => {
+        dispatch(addAviaryAC());
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeadLine);

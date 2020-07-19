@@ -1,11 +1,14 @@
-import React, { forwardRef } from "react";
+import React, {forwardRef} from "react";
 import styled from "styled-components";
 import editIcon from "../../../../../public/assets/icons/edit.svg";
 import deleteIcon from "../../../../../public/assets/icons/delete.svg";
+import {editGiraffeAC, fetchGiraffesInAviary} from "../../state/giraffe";
+import {connect} from "react-redux";
 
 const Wrapper = styled.div`
   position: absolute;
-  width: 174px;
+  width: min-content;
+  min-width: 174px;
   height: 94px;
   right: -10px;
   top: -10px;
@@ -17,7 +20,8 @@ const Wrapper = styled.div`
 
 const Action = styled.div`
   border-radius: 20px;
-  width: 151px;
+  width: min-content;
+  min-width: 151px;
   height: 32px;
   color: #fff;
   display: flex;
@@ -38,19 +42,35 @@ const ActionIcon = styled.div`
   margin-right: 10px;
 `;
 
-const InfoPopUp = forwardRef((props, ref) => {
-  return (
-    <Wrapper ref={ref}>
-      <Action>
-        <ActionIcon icon={editIcon} />
-        Редактировать
-      </Action>
-      <Action>
-        <ActionIcon icon={deleteIcon} />
-        Удалить
-      </Action>
-    </Wrapper>
-  );
+const InfoPopUp = forwardRef(({giraffeId, editGiraffe}, ref) => {
+    const handleClick = () => {
+        editGiraffe(giraffeId);
+    };
+
+    return (
+        <Wrapper ref={ref}>
+            <Action onClick={handleClick}>
+                <ActionIcon icon={editIcon}/>
+                Редактировать
+            </Action>
+            <Action>
+                <ActionIcon icon={deleteIcon}/>
+                Удалить
+            </Action>
+        </Wrapper>
+    );
 });
 
-export default InfoPopUp;
+const mapDispatchToProps = dispatch => ({
+    editGiraffe: (id) => {
+        dispatch(editGiraffeAC(id));
+    },
+});
+
+const ConnectedMyComponent = connect(
+    null, mapDispatchToProps
+)(InfoPopUp);
+
+export default forwardRef((props, ref) =>
+    <ConnectedMyComponent {...props} myForwardedRef={ref}/>
+);

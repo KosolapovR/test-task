@@ -8,6 +8,7 @@ import InfoPopUp from "./InfoPopUp";
 
 const Wrapper = styled.div`
   padding: 15px;
+  max-width: 33%;
 `;
 
 const ImgWrapper = styled.div`
@@ -88,7 +89,7 @@ const Params = styled.div`
   }
 `;
 
-export default function GiraffCard({ img }) {
+export default function GiraffeCard({ img, data }) {
   const [infoPopUp, setInfoPopUp] = useState(false);
 
   const handleInfoClick = () => {
@@ -120,28 +121,28 @@ export default function GiraffCard({ img }) {
         <ImgWrapper>
           <CardImg img={img} />
           <Dots icon={optionsIcon} onClick={handleInfoClick} />
-          {infoPopUp && <InfoPopUp ref={infoPopUpRef} />}
+          {infoPopUp && <InfoPopUp giraffeId={data._id} ref={infoPopUpRef} />}
         </ImgWrapper>
-        <GiraffName>Name</GiraffName>
+        <GiraffName>{data.name}</GiraffName>
         <OptionIcons>
           <Icon icon={venusIcon} />
           <Icon icon={scaleIcon} />
           <Icon icon={rulerIcon} />
         </OptionIcons>
         <HighlitghBlock>
-          <span>М</span>
-          <span>800</span>
-          <span>4</span>
+          <span>{data.male}</span>
+          <span>{data.weight}</span>
+          <span>{data.height}</span>
         </HighlitghBlock>
         <Params>
           <div>
-            <span>Цвет:</span> Стандарт
+            <span>Цвет:</span> {data.color}
           </div>
           <div>
-            <span>Диета:</span> Растительная
+            <span>Диета:</span> {data.diet}
           </div>
           <div>
-            <span>Характер:</span> Хулиган
+            <span>Характер:</span> {data.type}
           </div>
         </Params>
       </Card>

@@ -33,27 +33,30 @@ module.exports = (app) => {
         const color = req.body.color;
         const diet = req.body.diet;
         const type = req.body.type;
+        const aviary = req.body.aviary;
 
         const giraffe = new Giraffe({
-            name: name,
-            height: height,
-            weight: weight,
-            male: male,
-            color: color,
-            diet: diet,
-            type: type
+            name,
+            height,
+            weight,
+            male,
+            color,
+            diet,
+            type,
+            aviary
         });
+
         giraffe.save(function (err) {
             if (err) return console.log(err);
+            console.log('saved');
             res.send(giraffe);
         })
     });
     app.get('/api/giraffe', (req, res) => {
-        const aviaryNum = req.query.aviaryNum;
-        console.log('aviaryNum =', aviaryNum);
-        Giraffe.find({aviaryNum}, function(err, giraffes){
+        const aviary = req.query.aviary;
+        Giraffe.find({aviary}, function (err, giraffes) {
 
-            if(err) return console.log(err);
+            if (err) return console.log(err);
             res.send(giraffes);
         });
     });
@@ -64,7 +67,25 @@ module.exports = (app) => {
         })
 
         .put((req, res) => {
+            const id = req.body.id;
+            Giraffe.findById(id, function (err, giraffe) {
 
+                giraffe.name = req.body.name;
+                giraffe.male = req.body.male;
+                giraffe.height = req.body.height;
+                giraffe.weight = req.body.weight;
+                giraffe.color = req.body.color;
+                giraffe.diet = req.body.diet;
+                giraffe.type = req.body.type;
+                giraffe.aviary = req.body.aviary;
+
+                giraffe.save(function (err) {
+                    if (err) return console.log(err);
+                    console.log('updated');
+                    res.send(giraffe);
+                })
+                console.log(giraffe);
+            });
         })
         .delete((req, res) => {
 
