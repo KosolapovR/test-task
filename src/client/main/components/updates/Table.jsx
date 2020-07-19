@@ -22,7 +22,7 @@ const TableHead = styled.thead`
 const TableBody = styled.tbody`
   td{
     border-bottom: 1px solid #D9D9D9;
-    padding: 10px 0;
+    padding: 5px 0;
   }
 `;
 
@@ -38,11 +38,11 @@ function Table(props) {
                 </tr>
             </TableHead>
             <TableBody>
-                <TableRow/>
-                <TableRow/>
-                <TableRow/>
-                <TableRow/>
-                <TableRow/>
+                <TableRow type={'success'}/>
+                <TableRow type={'pending'}/>
+                <TableRow type={'reject'}/>
+                <TableRow type={'pending'}/>
+                <TableRow type={'success'}/>
             </TableBody>
         </Wrapper>
     );

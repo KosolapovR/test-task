@@ -1,0 +1,5 @@
+const GET_GIRAFFES_IN_AVIARY = 'giraffes/GET_GIRAFFES_IN_AVIARY';
+
+export {
+    GET_GIRAFFES_IN_AVIARY
+}

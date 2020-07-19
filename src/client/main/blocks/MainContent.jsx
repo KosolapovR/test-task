@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import HeadLine from "../components/headLine/HeadLine";
 import AddButton from "../components/AddButton";
-import GiraffList from "../components/giraffList/GiraffList";
+import GiraffList from "../components/giraffesList/GiraffesList";
 import CapacityTab from "../components/capacityTab/CapacityTab";
 import Updates from "../components/updates/Updates";
 

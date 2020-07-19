@@ -51,6 +51,6 @@ if (process.env.NODE_ENV == 'production') {
         console.log(`Server listening port: ${PORT}`);
     })
 }
-module.exports = app
+module.exports = app;
 
 
