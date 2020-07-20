@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "test": "set NODE_ENV=test jest --detectOpenHandles",
     "dev:unix": "NODE_ENV=development webpack && NODE_ENV=development nodemon ./src/server/index.js --watch ./src/server",
     "dev:win": "set NODE_ENV=development&& nodemon ./src/server/index.js --watch ./src/server"
   },

@@ -1,4 +1,5 @@
 import {
+    createGiraffeAC,
     setGiraffesInAviaryAC, updateGiraffeAC
 } from "./actions";
 import axios from "axios";
@@ -25,4 +26,15 @@ const updateGiraffe = (giraffe) => {
     }
 };
 
-export {fetchGiraffesInAviary, updateGiraffe}
+const createGiraffe = (giraffe) => {
+    return dispatch => {
+        axios
+            .post('http://localhost:8080/api/giraffe', giraffe)
+            .then(response => {
+                const giraffe = response.data;
+                dispatch(createGiraffeAC(giraffe));
+            })
+    }
+};
+
+export {fetchGiraffesInAviary, updateGiraffe, createGiraffe}

@@ -1,15 +1,16 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import {createGiraffe, updateGiraffe} from "../../../state/giraffe";
+import {createGiraffe, fetchGiraffesInAviary, updateGiraffe} from "../../../state/giraffe";
 import {connect} from "react-redux";
-import EditForm from "./EditForm";
+import AddForm from "./AddForm";
 import emptyPhoto from "../../../../../../public/assets/img/emptyPhoto.png";
 import axios from "axios";
 import {setImgAC} from "../../../state/giraffe/actions";
 
 const Wrapper = styled.div`
   padding: 15px;
-  width: 25%;
+  min-width: 25%;
+  max-width: 326px;
 `;
 
 const ImgWrapper = styled.div`
@@ -52,34 +53,14 @@ const Card = styled.div`
   }
 `;
 
-const EditableGiraffeCard = ( {data, aviary, setCurrentImg, image, updateGiraffe}) => {
-
-    const handleSubmit = giraffe => {
-        giraffe.aviary = aviary;
-        updateGiraffe(giraffe);
-    };
-
-    const infoPopUpRef = useRef(null);
-
-    useEffect(() => {
-        //скыритие popUp по клику вне его;
-        function handleClickOutside(event) {
-            if (
-                infoPopUpRef.current &&
-                !infoPopUpRef.current.contains(event.target)
-            ) {
-                setInfoPopUp(false);
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [infoPopUpRef]);
+const AddGiraffeCard = ({aviary, setCurrentImg, image, createGiraffe}) => {
 
     const [files, setFiles] = useState();
 
+    const handleSubmit = giraffe => {
+        giraffe.aviary = aviary;
+        createGiraffe(giraffe);
+    };
     useEffect(() => {
         if (files)
             sendFiles();
@@ -94,10 +75,10 @@ const EditableGiraffeCard = ( {data, aviary, setCurrentImg, image, updateGiraffe
             }
         })
         if (data.success) {
-            setFiles();
+            setFiles()
             setCurrentImg(files[0].name);
         }
-    };
+    }
 
     const handleFileChange = (event) => {
         if (event.target.files.length === 0 || event.target.files == undefined) return;
@@ -109,12 +90,12 @@ const EditableGiraffeCard = ( {data, aviary, setCurrentImg, image, updateGiraffe
             <Card>
                 <ImgWrapper>
                     <label htmlFor="file">
-                        {(data && data.image) || image ? <CardImg img={`/uploads/${data.image || image}`}/> : <CardImg img={emptyPhoto}/>}
+                        {image ? <CardImg img={`/uploads/${image}`}/> : <CardImg img={emptyPhoto}/>}
                         <input type="file" accept="image/*" name="photo" id="file" hidden
                                onChange={handleFileChange}/>
                     </label>
                 </ImgWrapper>
-                <EditForm onSubmit={handleSubmit} initialValues={data} image={image || data.image}/>
+                <AddForm onSubmit={handleSubmit} image={image}/>
             </Card>
         </Wrapper>
     );
@@ -128,10 +109,10 @@ const mapDispatchToProps = dispatch => ({
     setCurrentImg: (img) => {
         dispatch(setImgAC(img));
     },
-    updateGiraffe: (giraffe) => {
-        dispatch(updateGiraffe(giraffe));
-    },
+    createGiraffe: (giraffe) => {
+        dispatch(createGiraffe(giraffe));
+    }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditableGiraffeCard);
+export default connect(mapStateToProps, mapDispatchToProps)(AddGiraffeCard);
 

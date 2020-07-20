@@ -1,10 +1,19 @@
-import {ADD_AVIARY, EDIT_GIRAFFE, SET_GIRAFFES_INTO_AVIARY, UPDATE_GIRAFFE} from "./types";
+import {
+    ADD_AVIARY,
+    ADD_GIRAFFE, CREATE_GIRAFFE,
+    EDIT_GIRAFFE, HIDE_CAPACITY,
+    SET_CURRENT_IMG,
+    SET_GIRAFFES_INTO_AVIARY,
+    UPDATE_GIRAFFE
+} from "./types";
 
 const initialState = {
     aviaries: [],
     currentAviary: {number: 1},
     capacityShow: false,
-    editingGiraffeId: null
+    editingGiraffeId: null,
+    addingGiraffeId: null,
+    currentImg: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,9 +55,22 @@ const reducer = (state = initialState, action) => {
             });
             return newState;
         }
+        case CREATE_GIRAFFE: {
+            const newState = {...state, addingGiraffe: false, currentImg: null, capacityShow: true};
+            newState.aviaries[action.payload.aviary - 1].giraffes.push(action.payload);
+            return newState;
+        }
         case EDIT_GIRAFFE: {
-            debugger;
-            return {...state, editingGiraffeId: action.payload};
+            return {...state, addingGiraffe: false, editingGiraffeId: action.payload};
+        }
+        case ADD_GIRAFFE: {
+            return {...state, addingGiraffe: true, editingGiraffeId: null};
+        }
+        case SET_CURRENT_IMG: {
+            return {...state, currentImg: action.payload};
+        }
+        case HIDE_CAPACITY: {
+            return {...state, capacityShow: false};
         }
         default:
             return state;

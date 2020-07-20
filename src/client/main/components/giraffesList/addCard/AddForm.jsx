@@ -75,59 +75,42 @@ const Params = styled.div`
 `;
 
 
-function EditForm({handleSubmit, initialize, initialValues}) {
-    const {_id, name, height, weight, male, color, diet, type} = initialValues;
-
+function AddForm({handleSubmit, initialize, image}) {
     useEffect(() => {
         initialize({
-            name,
-            male,
-            height,
-            weight,
-            color,
-            diet,
-            type,
-            id: _id
+            image
         });
-    }, [name,
-        male,
-        height,
-        weight,
-        color,
-        diet,
-        type,
-        _id]);
+    }, [image]);
 
     return (
         <form onSubmit={handleSubmit}>
-            <GiraffName><Field name="name" component="input" type="text"/></GiraffName>
+            <GiraffName><Field name="name" placeholder="Кличка" component="input" type="text"/></GiraffName>
             <OptionIcons>
                 <Icon icon={venusIcon}/>
                 <Icon icon={scaleIcon}/>
                 <Icon icon={rulerIcon}/>
             </OptionIcons>
             <HighlitghBlock>
-                <Field name="male" component="input" type="text"/>
-                <Field name="weight" component="input" type="number"/>
-                <Field name="height" component="input" type="number"/>
+                <Field name="sex" placeholder="пол" component="input" type="text"/>
+                <Field name="weight" placeholder="вес" component="input" type="number"/>
+                <Field name="height" placeholder="рост" component="input" type="number"/>
             </HighlitghBlock>
             <Params>
                 <div>
-                    <span>Цвет:</span> <Field name="color" component="input" type="text"/>
+                    <span>Цвет:</span> <Field name="color" placeholder="цвет" component="input" type="text"/>
                 </div>
                 <div>
-                    <span>Диета:</span> <Field name="diet" component="input" type="text"/>
+                    <span>Диета:</span> <Field name="diet" placeholder="диета" component="input" type="text"/>
                 </div>
                 <div>
-                    <span>Характер:</span> <Field name="type" component="input" type="text"/>
+                    <span>Характер:</span> <Field name="temper" placeholder="характер" component="input" type="text"/>
                 </div>
             </Params>
-            <Field name='id' component='input' type='hidden'/>
             <button type='submit'>Сохранить</button>
         </form>
     );
 }
 
 export default reduxForm({
-    form: "editForm"
-})(EditForm);
+    form: "addForm"
+})(AddForm);

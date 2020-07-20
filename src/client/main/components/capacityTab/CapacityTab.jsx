@@ -89,14 +89,9 @@ const InfoButton = styled.div`
   }
 `;
 
-function CapacityTab({percent}) {
+function CapacityTab({percent, handleClose}) {
 
-    const [visibleInfoTab, setVisibleInfoTab] = useState(true);
     const [visibleUpdatesModal, setVisibleUpdatesModal] = useState(false);
-
-    const handleCloseTab = () => {
-        setVisibleInfoTab(false);
-    };
 
     const openModal = () => {
         setVisibleUpdatesModal(true);
@@ -128,10 +123,9 @@ function CapacityTab({percent}) {
 
     return (
         <>
-            {visibleInfoTab &&
             <Wrapper hide={true}>
                 <div>
-                    <CloseIcon icon={closeIcon} onClick={handleCloseTab}/>
+                    <CloseIcon icon={closeIcon} onClick={handleClose}/>
                     <Fullness>
                         <span>{percent}%</span>
                         Заполнение вольера
@@ -144,7 +138,6 @@ function CapacityTab({percent}) {
                     </ProgressBarWrapper>
                 </div>
             </Wrapper>
-            }
             {visibleUpdatesModal && <Updates ref={updatesModalRef} handleClose={closeModal}/>}
         </>
     );

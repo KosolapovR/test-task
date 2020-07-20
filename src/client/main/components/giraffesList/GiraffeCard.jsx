@@ -5,10 +5,11 @@ import scaleIcon from "../../../../../public/assets/icons/scale.svg";
 import rulerIcon from "../../../../../public/assets/icons/ruler.svg";
 import venusIcon from "../../../../../public/assets/icons/venus-mars.svg";
 import InfoPopUp from "./InfoPopUp";
+import emptyPhoto from "../../../../../public/assets/img/emptyPhoto.png";
 
 const Wrapper = styled.div`
   padding: 15px;
-  max-width: 33%;
+  width: 25%;
 `;
 
 const ImgWrapper = styled.div`
@@ -119,7 +120,7 @@ export default function GiraffeCard({ img, data }) {
     <Wrapper>
       <Card>
         <ImgWrapper>
-          <CardImg img={img} />
+          {(data && data.image) ? <CardImg img={`/uploads/${data.image}`}/> : <CardImg img={emptyPhoto}/>}
           <Dots icon={optionsIcon} onClick={handleInfoClick} />
           {infoPopUp && <InfoPopUp giraffeId={data._id} ref={infoPopUpRef} />}
         </ImgWrapper>
@@ -130,7 +131,7 @@ export default function GiraffeCard({ img, data }) {
           <Icon icon={rulerIcon} />
         </OptionIcons>
         <HighlitghBlock>
-          <span>{data.male}</span>
+          <span>{data.sex}</span>
           <span>{data.weight}</span>
           <span>{data.height}</span>
         </HighlitghBlock>
@@ -142,7 +143,7 @@ export default function GiraffeCard({ img, data }) {
             <span>Диета:</span> {data.diet}
           </div>
           <div>
-            <span>Характер:</span> {data.type}
+            <span>Характер:</span> {data.temper}
           </div>
         </Params>
       </Card>

@@ -5,13 +5,13 @@ import giraffeImg1 from '../../../../../public/assets/img/giro1.png'
 import {connect} from "react-redux";
 import {fetchGiraffesInAviary} from "../../state/giraffe";
 import EditableGiraffeCard from "./editableCard/EditableGiraffeCard";
+import AddGiraffeCard from "./addCard/AddGiraffeCard";
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(236px, 1fr));
+  display: flex;
 `;
 
-const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId}) => {
+const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId, addingGiraffe}) => {
 
     useEffect(() => {
         getGiraffes(currentAviary.number);
@@ -46,7 +46,11 @@ const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId}) => {
                 img={giraffeImg1}
                 aviary={currentAviary.number}
             />
-        )
+        );
+    }
+
+    if(addingGiraffe){
+        cards = [<AddGiraffeCard key={0} aviary={currentAviary.number}/>, ...cards]
     }
 
     return (
@@ -59,6 +63,7 @@ const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId}) => {
 const mapStateToProps = state => ({
     currentAviary: state.giraffesPage.currentAviary,
     editingGiraffeId: state.giraffesPage.editingGiraffeId,
+    addingGiraffe: state.giraffesPage.addingGiraffe,
 });
 
 const mapDispatchToProps = dispatch => ({

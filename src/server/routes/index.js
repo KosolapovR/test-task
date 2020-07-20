@@ -29,26 +29,30 @@ module.exports = (app) => {
         const name = req.body.name;
         const height = req.body.height;
         const weight = req.body.weight;
-        const male = req.body.male;
+        const sex = req.body.sex;
         const color = req.body.color;
         const diet = req.body.diet;
-        const type = req.body.type;
+        const temper = req.body.temper;
         const aviary = req.body.aviary;
+        const image = req.body.image;
+
+        console.log('-----------------------', req);
 
         const giraffe = new Giraffe({
             name,
             height,
             weight,
-            male,
+            sex,
             color,
             diet,
-            type,
-            aviary
+            temper,
+            aviary,
+            image
         });
 
         giraffe.save(function (err) {
             if (err) return console.log(err);
-            console.log('saved');
+            console.log('saved ++++++++++ ', giraffe);
             res.send(giraffe);
         })
     });
@@ -63,7 +67,11 @@ module.exports = (app) => {
     app.route('/api/giraffe/:id')
         .get((req, res) => {
             const id = req.params.id;
-            res.send(id);
+            Giraffe.findById(id, function (err, giraffe) {
+                if(err) res.sendStatus(404);
+                console.log('===================', giraffe);
+                res.send(giraffe);
+            });
         })
 
         .put((req, res) => {
@@ -71,13 +79,16 @@ module.exports = (app) => {
             Giraffe.findById(id, function (err, giraffe) {
 
                 giraffe.name = req.body.name;
-                giraffe.male = req.body.male;
+                giraffe.sex = req.body.sex;
                 giraffe.height = req.body.height;
                 giraffe.weight = req.body.weight;
                 giraffe.color = req.body.color;
                 giraffe.diet = req.body.diet;
-                giraffe.type = req.body.type;
+                giraffe.temper = req.body.temper;
                 giraffe.aviary = req.body.aviary;
+                giraffe.image = req.body.image;
+
+                console.log('in update: ', req.body.temper);
 
                 giraffe.save(function (err) {
                     if (err) return console.log(err);

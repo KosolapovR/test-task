@@ -1,7 +1,7 @@
-import {fetchGiraffesInAviary, updateGiraffe} from './operations';
-import {addAviaryAC, editGiraffeAC} from './actions';
+import {fetchGiraffesInAviary, updateGiraffe, createGiraffe} from './operations';
+import {addAviaryAC, hideCapacityAC, editGiraffeAC, addGiraffeAC} from './actions';
 import {default as giraffes} from './reducer'
 
-export {fetchGiraffesInAviary, updateGiraffe, editGiraffeAC};
+export {fetchGiraffesInAviary, hideCapacityAC, updateGiraffe, createGiraffe, editGiraffeAC, addGiraffeAC, addAviaryAC};
 
 export default giraffes;
