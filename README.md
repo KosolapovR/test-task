@@ -1,6 +1,6 @@
 ## GIRAFFES FARM
 
-### INSTALATION
+### INSTALLATION
 ```
 git clone (repo url)
 
