@@ -42,9 +42,7 @@ const StatusReject = styled.div`
 
 function TableRow({data}) {
     const {date, type, status, giraffeName} = data;
-    const dateFormatter = new DateFormatter();
-    const formattedDate = dateFormatter.format(date);
-    debugger;
+
     let statusElem;
     switch (status) {
         case SUCCESS:
@@ -60,6 +58,9 @@ function TableRow({data}) {
             statusElem = <StatusNotConfirmed>Не подтвержден</StatusNotConfirmed>;
             break;
     }
+
+    const dateFormatter = new DateFormatter();
+    const formattedDate = dateFormatter.format(date);
 
     return (
         <tr>

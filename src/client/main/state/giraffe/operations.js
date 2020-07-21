@@ -42,9 +42,8 @@ const deleteGiraffe = (id) => {
         axios
             .delete(`http://localhost:8080/api/giraffe/${id}`)
             .then(response => {
-                const status = response.status;
-                debugger;
-                dispatch(deleteGiraffeAC(id));
+                if (response.status === 200)
+                    dispatch(deleteGiraffeAC(id));
             })
     }
 };

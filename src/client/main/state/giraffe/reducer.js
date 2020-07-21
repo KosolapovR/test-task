@@ -91,7 +91,7 @@ const reducer = (state = initialState, action) => {
         case DELETE_GIRAFFE: {
             const giraffes = state.currentAviary.giraffes.filter(g => g._id !== action.payload);
             const deletedGiraffe = state.currentAviary.giraffes.find(g => g._id === action.payload);
-            debugger;
+
             const newState = {
                 ...state,
                 updatesHistory: [{
@@ -142,6 +142,5 @@ const reducer = (state = initialState, action) => {
             return state;
     }
 };
-
 
 export default reducer;

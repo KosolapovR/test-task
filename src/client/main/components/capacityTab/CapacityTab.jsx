@@ -108,7 +108,6 @@ function CapacityTab({percent, handleClose}) {
     useEffect(() => {
         //сокрытие popUp по клику вне его;
         function handleClickOutside(event) {
-            debugger;
             if (
                 updatesModalRef.current &&
                 !updatesModalRef.current.contains(event.target)
