@@ -1,6 +1,7 @@
 import React, {forwardRef} from 'react';
 import styled from "styled-components";
-import closeIcon from "../../../../../public/assets/icons/closeBlack.svg";
+
+import closeIcon from "assets/icons/closeBlack.svg";
 import Table from "./Table";
 
 const Blanket = styled.div`
@@ -24,7 +25,7 @@ position: absolute;
   box-shadow: 0px 4px 15px #869CB0;
   border-radius: 28px;
   padding: 20px 30px;
-  overflow-y: auto;
+  overflow: hidden;
 `;
 
 const Head = styled.div`
@@ -34,7 +35,7 @@ const Head = styled.div`
   color: #435F40;
   display:flex;
   justify-content:space-between;
-  border-bottom: 3px solid #D9D9D9;
+  border-bottom: 2px solid #D9D9D9;
   padding-bottom: 6px;
 `;
 

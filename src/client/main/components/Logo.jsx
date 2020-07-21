@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../../../public/assets/icons/logo.png";
+
+import logo from "assets/icons/logo.png";
 
 const LogoWrapper = styled.div`
   height: 60px;
@@ -27,13 +28,13 @@ const LogoSubTitle = styled.span`
 `;
 
 export default function Logo() {
-  return (
-    <LogoWrapper>
-      <img src={logo} alt="logo" />
-      <TitleWrapper>
-        <LogoTitle>Ферма Заслуженных Жирафов</LogoTitle>
-        <LogoSubTitle>России и СНГ</LogoSubTitle>
-      </TitleWrapper>
-    </LogoWrapper>
-  );
+    return (
+        <LogoWrapper>
+            <img src={logo} alt="logo"/>
+            <TitleWrapper>
+                <LogoTitle>Ферма Заслуженных Жирафов</LogoTitle>
+                <LogoSubTitle>России и СНГ</LogoSubTitle>
+            </TitleWrapper>
+        </LogoWrapper>
+    );
 }

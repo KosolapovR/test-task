@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import {createGiraffe, fetchGiraffesInAviary, updateGiraffe} from "../../../state/giraffe";
 import {connect} from "react-redux";
-import AddForm from "./AddForm";
-import emptyPhoto from "../../../../../../public/assets/img/emptyPhoto.png";
 import axios from "axios";
+
+import emptyPhoto from "assets/img/emptyPhoto.png";
+import closeIcon from "assets/icons/closeBlack.svg";
+import {closeAddingCardAC, createGiraffe} from "../../../state/giraffe";
 import {setImgAC} from "../../../state/giraffe/actions";
+import AddForm from "./AddForm";
 
 const Wrapper = styled.div`
   padding: 15px;
-  min-width: 25%;
-  max-width: 326px;
+    width: 25%;
 `;
 
 const ImgWrapper = styled.div`
@@ -23,6 +24,7 @@ const CardImg = styled.img.attrs(props => ({
     src: props.img
 }))`
   border-radius: 100px;
+  max-width: 100%;
 `;
 
 const Card = styled.div`
@@ -36,7 +38,7 @@ const Card = styled.div`
   background: #567354;
   border-radius: 33px;
   border: 0;
-  width: 50%;
+  width: min-content;
   font-size: 16px;
   line-height: 19px;
   font-weight: 500;
@@ -53,7 +55,18 @@ const Card = styled.div`
   }
 `;
 
-const AddGiraffeCard = ({aviary, setCurrentImg, image, createGiraffe}) => {
+const CloseIcon = styled.div`
+  background: ${props => `url(${props.icon}) no-repeat center`};
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  align-self: center;
+  cursor: pointer;
+`;
+
+const AddGiraffeCard = ({aviary, setCurrentImg, image, createGiraffe, closeCard}) => {
 
     const [files, setFiles] = useState();
 
@@ -75,7 +88,7 @@ const AddGiraffeCard = ({aviary, setCurrentImg, image, createGiraffe}) => {
             }
         })
         if (data.success) {
-            setFiles()
+            setFiles();
             setCurrentImg(files[0].name);
         }
     }
@@ -84,6 +97,10 @@ const AddGiraffeCard = ({aviary, setCurrentImg, image, createGiraffe}) => {
         if (event.target.files.length === 0 || event.target.files == undefined) return;
         setFiles(event.target.files);
     }
+
+    const handleClose = () => {
+        closeCard();
+    };
 
     return (
         <Wrapper>
@@ -94,6 +111,7 @@ const AddGiraffeCard = ({aviary, setCurrentImg, image, createGiraffe}) => {
                         <input type="file" accept="image/*" name="photo" id="file" hidden
                                onChange={handleFileChange}/>
                     </label>
+                    <CloseIcon icon={closeIcon} onClick={handleClose}/>
                 </ImgWrapper>
                 <AddForm onSubmit={handleSubmit} image={image}/>
             </Card>
@@ -111,7 +129,11 @@ const mapDispatchToProps = dispatch => ({
     },
     createGiraffe: (giraffe) => {
         dispatch(createGiraffe(giraffe));
-    }
+    },
+    closeCard: () => {
+        dispatch(closeAddingCardAC());
+    },
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddGiraffeCard);

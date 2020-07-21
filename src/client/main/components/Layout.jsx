@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+
 import Sidebar from "../blocks/SideBar";
 import MainContent from "../blocks/MainContent";
 
@@ -18,11 +19,10 @@ const Wrapper = styled.div`
 `;
 
 function Layout() {
-
     return (
         <Wrapper>
-            <Sidebar />
-            <MainContent />
+            <Sidebar/>
+            <MainContent/>
         </Wrapper>
     )
 }

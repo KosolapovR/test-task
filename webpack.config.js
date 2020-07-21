@@ -3,13 +3,14 @@ const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const html = ['index']
+const assets = path.resolve(__dirname, '/public/assets');
 
 const htmlArray = html.map(name => {
     return new HtmlWebPackPlugin({
         filename: `${name}.html`,
         template: `${__dirname}/public/${name}.html`,
         templateParameters: () => {
-            return { 'foo': process.env.NODE_ENV == 'production' ? 'production' : 'dev' }
+            return {'foo': process.env.NODE_ENV == 'production' ? 'production' : 'dev'}
         },
         hash: true,
         inject: true,
@@ -60,6 +61,7 @@ module.exports = {
     resolve: {
         alias: {
             'react-dom': '@hot-loader/react-dom',
+            assets: path.resolve(__dirname, 'public/assets'),
         },
         extensions: ['.js', '.jsx']
     },
@@ -78,25 +80,25 @@ module.exports = {
                 },
             ]
         },
-        {
-            test: /\.(png|jpg|gif|svg)$/,
-            use: [
-                // 'cache-loader',
-                {
-                    loader: 'file-loader?name=./image/[hash].[ext]'
-                },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                    // 'cache-loader',
+                    {
+                        loader: 'file-loader?name=./image/[hash].[ext]'
+                    },
 
-            ]
-        },
-        {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
-        },
+                ]
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
         ]
     },
     plugins: [
         // new CleanWebpackPlugin(),
-        
+
         new webpack.HotModuleReplacementPlugin(),
         ...htmlArray,
     ]

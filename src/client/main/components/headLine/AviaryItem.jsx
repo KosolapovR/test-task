@@ -14,10 +14,12 @@ const AviaryName = styled.div`
   color: ${props => (props.isSelected ? `#484848` : `#D9D9D9`)};
 `;
 
-export default function AviaryItem({ num, isSelected, handleClick }) {
-  return (
-    <Wrapper isSelected={isSelected} onClick={() => {handleClick(num)}}>
-      <AviaryName isSelected={isSelected}>Вольер {num}</AviaryName>
-    </Wrapper>
-  );
+export default function AviaryItem({num, isSelected, handleClick}) {
+    return (
+        <Wrapper isSelected={isSelected} onClick={() => {
+            handleClick(num)
+        }}>
+            <AviaryName isSelected={isSelected}>Вольер {num}</AviaryName>
+        </Wrapper>
+    );
 }

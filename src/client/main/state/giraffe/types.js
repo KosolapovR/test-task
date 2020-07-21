@@ -7,6 +7,13 @@ const EDIT_GIRAFFE = 'giraffes/EDIT_GIRAFFE';
 const ADD_GIRAFFE = 'giraffes/ADD_GIRAFFE';
 const SET_CURRENT_IMG = 'giraffes/SET_CURRENT_IMG';
 const HIDE_CAPACITY = 'giraffes/HIDE_CAPACITY';
+const CLOSE_ADDING_CARD = 'giraffes/CLOSE_ADDING_CARD';
+const CLOSE_EDITING_CARD = 'giraffes/CLOSE_EDITING_CARD';
+
+const SUCCESS = 'updatesHistory/SUCCESS';
+const REJECTED = 'updatesHistory/REJECTED';
+const NOT_CONFIRMED = 'updatesHistory/NOT_CONFIRMED';
+const WAITING = 'updatesHistory/WAITING';
 
 export {
     SET_GIRAFFES_INTO_AVIARY,
@@ -17,5 +24,11 @@ export {
     EDIT_GIRAFFE,
     ADD_GIRAFFE,
     SET_CURRENT_IMG,
-    HIDE_CAPACITY
+    HIDE_CAPACITY,
+    CLOSE_ADDING_CARD,
+    CLOSE_EDITING_CARD,
+    SUCCESS,
+    WAITING,
+    NOT_CONFIRMED,
+    REJECTED
 }

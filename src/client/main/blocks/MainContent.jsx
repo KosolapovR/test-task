@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import {connect} from "react-redux";
+
+import {addGiraffeAC, hideCapacityAC} from "../state/giraffe";
 import HeadLine from "../components/headLine/HeadLine";
 import AddButton from "../components/AddButton";
 import GiraffList from "../components/giraffesList/GiraffesList";
 import CapacityTab from "../components/capacityTab/CapacityTab";
-import Updates from "../components/updates/Updates";
-import {addGiraffeAC, editGiraffeAC, hideCapacityAC} from "../state/giraffe";
-import {connect} from "react-redux";
 
 const Wrapper = styled.div`
   background: #fff;
@@ -45,7 +45,8 @@ const MainContent = ({hideCapacity, addGiraffe, capacityShow, aviary}) => {
                 {aviary && aviary.giraffes && aviary.giraffes.length < 4 && <AddButton addClick={handleAddGiraffe}/>}
             </PageTitleWrapper>
             <GiraffList/>
-            {capacityShow && aviary && <CapacityTab percent={aviary.giraffes.length * 25} handleClose={closeCapacityTab}/>}
+            {capacityShow && aviary &&
+            <CapacityTab percent={aviary.giraffes.length * 25} handleClose={closeCapacityTab}/>}
         </Wrapper>
     );
 }

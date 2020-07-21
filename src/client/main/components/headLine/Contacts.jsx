@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import bellIcon from "../../../../../public/assets/icons/bell.svg";
-import giraffeIcon from "../../../../../public/assets/icons/logo.png";
+
+import bellIcon from "assets/icons/bell.svg";
+import giraffeIcon from "assets/icons/logo.png";
 
 const Wrapper = styled.div`
   border-bottom: 3px solid #d9d9d9;
@@ -28,11 +29,11 @@ const Email = styled.div`
 `;
 
 export default function HeadLine() {
-  return (
-    <Wrapper>
-      <Icon icon={bellIcon} />
-      <Icon icon={giraffeIcon} logo={true} />
-      <Email>hello@giraffe.com</Email>
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <Icon icon={bellIcon}/>
+            <Icon icon={giraffeIcon} logo={true}/>
+            <Email>hello@giraffe.com</Email>
+        </Wrapper>
+    );
 }

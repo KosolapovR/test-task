@@ -1,11 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
-import optionsIcon from "../../../../../public/assets/icons/options.svg";
-import scaleIcon from "../../../../../public/assets/icons/scale.svg";
-import rulerIcon from "../../../../../public/assets/icons/ruler.svg";
-import venusIcon from "../../../../../public/assets/icons/venus-mars.svg";
+
+import optionsIcon from "assets/icons/options.svg";
+import scaleIcon from "assets/icons/scale.svg";
+import rulerIcon from "assets/icons/ruler.svg";
+import venusIcon from "assets/icons/venus-mars.svg";
+import emptyPhoto from "assets/img/emptyPhoto.png";
 import InfoPopUp from "./InfoPopUp";
-import emptyPhoto from "../../../../../public/assets/img/emptyPhoto.png";
 
 const Wrapper = styled.div`
   padding: 15px;
@@ -22,6 +23,7 @@ const CardImg = styled.img.attrs(props => ({
   src: props.img
 }))`
   border-radius: 100px;
+  max-width: 100%;
 `;
 
 const Card = styled.div`
@@ -52,6 +54,7 @@ const Icon = styled.div`
 const GiraffName = styled.div`
   text-align: center;
   font-size: 22px;
+  min-height: 26px;
   font-weight: bold;
   line-height: 26px;
   color: #435f40;
@@ -70,6 +73,7 @@ const HighlitghBlock = styled.div`
   background: #dcb18b;
   border-radius: 258px;
   padding: 8px 15px;
+  min-height: 35px;
   color: #333333;
   font-weight: bold;
   font-size: 16px;
@@ -90,12 +94,11 @@ const Params = styled.div`
   }
 `;
 
-export default function GiraffeCard({ img, data }) {
+export default function GiraffeCard({data }) {
   const [infoPopUp, setInfoPopUp] = useState(false);
 
   const handleInfoClick = () => {
     setInfoPopUp(true);
-    setTimeout(() => {setInfoPopUp(false)}, 3000);
   };
 
   const infoPopUpRef = useRef();

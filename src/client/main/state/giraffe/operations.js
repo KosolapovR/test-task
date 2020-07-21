@@ -1,5 +1,5 @@
 import {
-    createGiraffeAC,
+    createGiraffeAC, deleteGiraffeAC,
     setGiraffesInAviaryAC, updateGiraffeAC
 } from "./actions";
 import axios from "axios";
@@ -14,6 +14,17 @@ const fetchGiraffesInAviary = aviaryNum => {
             })
     }
 };
+const createGiraffe = (giraffe) => {
+    return dispatch => {
+        axios
+            .post('http://localhost:8080/api/giraffe', giraffe)
+            .then(response => {
+                const giraffe = response.data;
+                dispatch(createGiraffeAC(giraffe));
+            })
+    }
+};
+
 
 const updateGiraffe = (giraffe) => {
     return dispatch => {
@@ -26,15 +37,16 @@ const updateGiraffe = (giraffe) => {
     }
 };
 
-const createGiraffe = (giraffe) => {
+const deleteGiraffe = (id) => {
     return dispatch => {
         axios
-            .post('http://localhost:8080/api/giraffe', giraffe)
+            .delete(`http://localhost:8080/api/giraffe/${id}`)
             .then(response => {
-                const giraffe = response.data;
-                dispatch(createGiraffeAC(giraffe));
+                const status = response.status;
+                debugger;
+                dispatch(deleteGiraffeAC(id));
             })
     }
 };
 
-export {fetchGiraffesInAviary, updateGiraffe, createGiraffe}
+export {fetchGiraffesInAviary, updateGiraffe, createGiraffe, deleteGiraffe}

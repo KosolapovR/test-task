@@ -1,11 +1,13 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
-import {createGiraffe, updateGiraffe} from "../../../state/giraffe";
-import {connect} from "react-redux";
-import EditForm from "./EditForm";
-import emptyPhoto from "../../../../../../public/assets/img/emptyPhoto.png";
 import axios from "axios";
+import {connect} from "react-redux";
+
+import emptyPhoto from "assets/img/emptyPhoto.png";
+import closeIcon from "assets/icons/closeBlack.svg";
+import {closeEditingCardAC, updateGiraffe} from "../../../state/giraffe";
 import {setImgAC} from "../../../state/giraffe/actions";
+import EditForm from "./EditForm";
 
 const Wrapper = styled.div`
   padding: 15px;
@@ -22,6 +24,7 @@ const CardImg = styled.img.attrs(props => ({
     src: props.img
 }))`
   border-radius: 100px;
+  max-width: 100%;
 `;
 
 const Card = styled.div`
@@ -35,7 +38,7 @@ const Card = styled.div`
   background: #567354;
   border-radius: 33px;
   border: 0;
-  width: 50%;
+  width: min-content;
   font-size: 16px;
   line-height: 19px;
   font-weight: 500;
@@ -52,7 +55,19 @@ const Card = styled.div`
   }
 `;
 
-const EditableGiraffeCard = ( {data, aviary, setCurrentImg, image, updateGiraffe}) => {
+const CloseIcon = styled.div`
+  background: ${props => `url(${props.icon}) no-repeat center`};
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  right: 0;
+  align-self: center;
+  cursor: pointer;
+`;
+
+
+const EditableGiraffeCard = ({data, aviary, setCurrentImg, image, updateGiraffe, closeCard}) => {
 
     const handleSubmit = giraffe => {
         giraffe.aviary = aviary;
@@ -102,17 +117,23 @@ const EditableGiraffeCard = ( {data, aviary, setCurrentImg, image, updateGiraffe
     const handleFileChange = (event) => {
         if (event.target.files.length === 0 || event.target.files == undefined) return;
         setFiles(event.target.files);
-    }
+    };
+
+    const handleClose = () => {
+        closeCard(data.name);
+    };
 
     return (
         <Wrapper>
             <Card>
                 <ImgWrapper>
                     <label htmlFor="file">
-                        {(data && data.image) || image ? <CardImg img={`/uploads/${data.image || image}`}/> : <CardImg img={emptyPhoto}/>}
+                        {(data && data.image) || image ? <CardImg img={`/uploads/${data.image || image}`}/> :
+                            <CardImg img={emptyPhoto}/>}
                         <input type="file" accept="image/*" name="photo" id="file" hidden
                                onChange={handleFileChange}/>
                     </label>
+                    <CloseIcon icon={closeIcon} onClick={handleClose}/>
                 </ImgWrapper>
                 <EditForm onSubmit={handleSubmit} initialValues={data} image={image || data.image}/>
             </Card>
@@ -131,7 +152,9 @@ const mapDispatchToProps = dispatch => ({
     updateGiraffe: (giraffe) => {
         dispatch(updateGiraffe(giraffe));
     },
+    closeCard: (giraffeName) => {
+        dispatch(closeEditingCardAC(giraffeName));
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditableGiraffeCard);
-

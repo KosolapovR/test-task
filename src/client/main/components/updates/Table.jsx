@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from "react-redux";
 import styled from "styled-components";
+
 import TableRow from "./TableRow";
 
 const Wrapper = styled.table`
@@ -14,19 +16,23 @@ const TableHead = styled.thead`
   color: #B4B4B4;
   text-align: left;
   th{
-    border-bottom: 1px solid #D9D9D9;
+    border-top: 1px solid #D9D9D9;
    padding: 10px 0;
   }
 `;
 
 const TableBody = styled.tbody`
   td{
-    border-bottom: 1px solid #D9D9D9;
+    border-top: 1px solid #D9D9D9;
     padding: 5px 0;
   }
 `;
 
-function Table(props) {
+const CenteredCell = styled.th`
+  text-align: center;
+`;
+
+function Table({updatesHistory}) {
     return (
         <Wrapper>
             <TableHead>
@@ -34,18 +40,18 @@ function Table(props) {
                     <th>Дата</th>
                     <th>Действие</th>
                     <th>Жираф</th>
-                    <th>Статус</th>
+                    <CenteredCell>Статус</CenteredCell>
                 </tr>
             </TableHead>
             <TableBody>
-                <TableRow type={'success'}/>
-                <TableRow type={'pending'}/>
-                <TableRow type={'reject'}/>
-                <TableRow type={'pending'}/>
-                <TableRow type={'success'}/>
+                {updatesHistory && updatesHistory.map((history, i) => <TableRow key={i} data={history}/>)}
             </TableBody>
         </Wrapper>
     );
 }
 
-export default Table;
+const mapStateToProps = state => ({
+    updatesHistory: state.giraffesPage.updatesHistory,
+});
+
+export default connect(mapStateToProps, null)(Table);

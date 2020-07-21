@@ -1,6 +1,6 @@
 import {
     ADD_AVIARY,
-    ADD_GIRAFFE, CREATE_GIRAFFE,
+    ADD_GIRAFFE, CLOSE_ADDING_CARD, CLOSE_EDITING_CARD, CREATE_GIRAFFE, DELETE_GIRAFFE,
     EDIT_GIRAFFE, HIDE_CAPACITY,
     SET_CURRENT_IMG,
     SET_GIRAFFES_INTO_AVIARY,
@@ -19,6 +19,11 @@ const createGiraffeAC = payload => ({
 
 const updateGiraffeAC = payload => ({
     type: UPDATE_GIRAFFE,
+    payload
+});
+
+const deleteGiraffeAC = payload => ({
+    type: DELETE_GIRAFFE,
     payload
 });
 
@@ -45,13 +50,25 @@ const hideCapacityAC = () => ({
     type: HIDE_CAPACITY,
 });
 
+const closeAddingCardAC = () => ({
+    type: CLOSE_ADDING_CARD
+});
+
+const closeEditingCardAC = (payload) => ({
+    type: CLOSE_EDITING_CARD,
+    payload
+});
+
 export {
     addAviaryAC,
     createGiraffeAC,
+    deleteGiraffeAC,
     updateGiraffeAC,
     setGiraffesInAviaryAC,
     editGiraffeAC,
     addGiraffeAC,
     setImgAC,
-    hideCapacityAC
+    hideCapacityAC,
+    closeAddingCardAC,
+    closeEditingCardAC
 }

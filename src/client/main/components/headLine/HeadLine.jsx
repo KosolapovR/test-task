@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import {connect} from "react-redux";
+
+import {addAviaryAC} from "../../state/giraffe/actions";
+import AddButton from "../AddButton";
 import AviaryList from "./AviaryList";
 import Contacts from "./Contacts";
-import AddButton from "../AddButton";
-import {connect} from "react-redux";
-import {addAviaryAC} from "../../state/giraffe/actions";
 
 const Wrapper = styled.div`
   height: 60px;

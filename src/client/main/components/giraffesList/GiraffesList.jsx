@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
-import GiraffeCard from "./GiraffeCard";
-import giraffeImg1 from '../../../../../public/assets/img/giro1.png'
 import {connect} from "react-redux";
+
 import {fetchGiraffesInAviary} from "../../state/giraffe";
+import GiraffeCard from "./GiraffeCard";
 import EditableGiraffeCard from "./editableCard/EditableGiraffeCard";
 import AddGiraffeCard from "./addCard/AddGiraffeCard";
 
@@ -15,8 +15,7 @@ const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId, addingGiraf
 
     useEffect(() => {
         getGiraffes(currentAviary.number);
-    }, []);
-
+    }, [currentAviary.number]);
 
     let cards;
     if (editingGiraffeId) {
@@ -25,14 +24,12 @@ const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId, addingGiraf
                     return <EditableGiraffeCard
                         key={giraffe._id}
                         data={giraffe}
-                        img={giraffeImg1}
                         aviary={currentAviary.number}
                     />;
                 } else {
                     return <GiraffeCard
                         key={giraffe._id}
                         data={giraffe}
-                        img={giraffeImg1}
                         aviary={currentAviary.number}
                     />;
                 }
@@ -43,13 +40,12 @@ const GiraffesList = ({getGiraffes, currentAviary, editingGiraffeId, addingGiraf
             <GiraffeCard
                 key={giraffe._id}
                 data={giraffe}
-                img={giraffeImg1}
                 aviary={currentAviary.number}
             />
         );
     }
 
-    if(addingGiraffe){
+    if (addingGiraffe) {
         cards = [<AddGiraffeCard key={0} aviary={currentAviary.number}/>, ...cards]
     }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import plusIcon from "../../../../public/assets/icons/plus.svg";
+
+import plusIcon from "assets/icons/plus.svg";
 
 const Wrapper = styled.div`
   height: ${props => (props.size === "small" ? `25px` : `37px`)};
@@ -23,13 +24,13 @@ const Icon = styled.div`
   align-self: center;
 `;
 
-export default function AddButton({ size, addClick }) {
-  if (!size) {
-    size = "normal";
-  }
-  return (
-    <Wrapper size={size} onClick={addClick}>
-      <Icon icon={plusIcon} />
-    </Wrapper>
-  );
+export default function AddButton({size, addClick}) {
+    if (!size) {
+        size = "normal";
+    }
+    return (
+        <Wrapper size={size} onClick={addClick}>
+            <Icon icon={plusIcon}/>
+        </Wrapper>
+    );
 }

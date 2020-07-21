@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled, {keyframes} from "styled-components";
-import closeIcon from "../../../../../public/assets/icons/close.svg";
+
+import closeIcon from "assets/icons/close.svg";
 import Updates from "../updates/Updates";
 
 const show = keyframes`
   from {
-    height: 0px;
+    height: 0;
   }
 
   to {

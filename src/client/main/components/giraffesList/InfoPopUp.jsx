@@ -1,8 +1,8 @@
 import React, {forwardRef} from "react";
 import styled from "styled-components";
-import editIcon from "../../../../../public/assets/icons/edit.svg";
-import deleteIcon from "../../../../../public/assets/icons/delete.svg";
-import {editGiraffeAC, fetchGiraffesInAviary} from "../../state/giraffe";
+import editIcon from "assets/icons/edit.svg";
+import deleteIcon from "assets/icons/delete.svg";
+import {deleteGiraffe, editGiraffeAC} from "../../state/giraffe";
 import {connect} from "react-redux";
 
 const Wrapper = styled.div`
@@ -42,18 +42,22 @@ const ActionIcon = styled.div`
   margin-right: 10px;
 `;
 
-const InfoPopUp = forwardRef(({giraffeId, editGiraffe}, ref) => {
-    const handleClick = () => {
+const InfoPopUp = forwardRef(({giraffeId, editGiraffe, deleteGiraffe}, ref) => {
+    const handleEditClick = () => {
         editGiraffe(giraffeId);
+    };
+
+    const handleDeleteClick = () => {
+        deleteGiraffe(giraffeId);
     };
 
     return (
         <Wrapper ref={ref}>
-            <Action onClick={handleClick}>
+            <Action onClick={handleEditClick}>
                 <ActionIcon icon={editIcon}/>
                 Редактировать
             </Action>
-            <Action>
+            <Action onClick={handleDeleteClick}>
                 <ActionIcon icon={deleteIcon}/>
                 Удалить
             </Action>
@@ -65,12 +69,9 @@ const mapDispatchToProps = dispatch => ({
     editGiraffe: (id) => {
         dispatch(editGiraffeAC(id));
     },
+    deleteGiraffe: (id) => {
+        dispatch(deleteGiraffe(id));
+    }
 });
 
-const ConnectedMyComponent = connect(
-    null, mapDispatchToProps
-)(InfoPopUp);
-
-export default forwardRef((props, ref) =>
-    <ConnectedMyComponent {...props} myForwardedRef={ref}/>
-);
+export default connect(null, mapDispatchToProps, null, {forwardRef: true})(InfoPopUp);

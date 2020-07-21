@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import AviaryItem from "./AviaryItem";
-import {fetchGiraffesInAviary} from "../../state/giraffe";
 import {connect} from "react-redux";
-import {addAviaryAC} from "../../state/giraffe/actions";
+
+import {fetchGiraffesInAviary} from "../../state/giraffe";
+import AviaryItem from "./AviaryItem";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -29,7 +29,7 @@ const AviaryList = ({currentAviary, aviaries, getGiraffes}) => {
             )}
         </Wrapper>
     );
-}
+};
 
 const mapDispatchToProps = dispatch => ({
     getGiraffes: (aviaryNum) => {

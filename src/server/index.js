@@ -40,13 +40,6 @@ if (process.env.NODE_ENV == 'production') {
         }));
     app.use(require('webpack-hot-middleware')(compiler));
 
-    // const options = {
-    //     key: fs.readFileSync(__dirname + '/ssl/key.pem'),
-    //     cert: fs.readFileSync(__dirname + '/ssl/cert.pem'),
-    //     requestCert: false,
-    //     rejectUnauthorized: false
-    // };
-    // const server = https.createServer(options, app);
     app.listen(PORT, () => {
         console.log(`Server listening port: ${PORT}`);
     })

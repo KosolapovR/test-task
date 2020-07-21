@@ -1,14 +1,11 @@
 const multer = require('multer');
-const path = require('path');
-const express = require('express');
-const jsonParser = express.json();
 const {Giraffe} = require('../models/giraffe');
 const storage = multer.diskStorage({
     destination: './uploads/' /* relative to root dir of project */,
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
-})
+});
 
 const upload = multer({storage: storage})
 
@@ -85,4 +82,4 @@ module.exports = (app) => {
                 res.send(giraffe);
             });
         });
-}
+};

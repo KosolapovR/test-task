@@ -1,52 +1,72 @@
 import React from 'react';
 import styled from "styled-components";
 
+import {DateFormatter} from "../../../../utils/dateFormat";
+import {NOT_CONFIRMED, REJECTED, SUCCESS, WAITING} from "../../state/giraffe/types";
+
 const StatusSucces = styled.div`
-    background: green;
-    border-radius: 20px;
-    padding: 5px;
-    color: #FFFFFF;
+    background: #C1FFC8;
+    border-radius: 5px;
+    padding: 7px 9px;
+    width: max-content;
+    color: #8B8B8B;
     text-align: center;
 `;
 
 const StatusPending = styled.div`
-    background: blue;
-    border-radius: 20px;
-    padding: 5px;
+    background: #D2EFFF;
+    border-radius: 5px;
+    padding: 7px 9px;
+    width: max-content;
+    color: #8B8B8B;
     text-align: center;
-    color: #FFFFFF;
+`;
+
+const StatusNotConfirmed = styled.div`
+    background: #FFEAC1;
+    border-radius: 5px;
+    padding: 7px 9px;
+    width: max-content;
+    color: #8B8B8B;
+    text-align: center;
 `;
 
 const StatusReject = styled.div`
-    background: red;
-    border-radius: 20px;
-    padding: 5px;
+    background: #FFC1C1;
+    border-radius: 5px;
+    padding: 6px 9px;
+    width: max-content;
+    color: #8B8B8B;
     text-align: center;
-    color: #FFFFFF;
 `;
 
-
-function TableRow({type}) {
-
-    let status;
-    switch (type) {
-        case 'success':
-            status = <StatusSucces>Сохранен</StatusSucces>
+function TableRow({data}) {
+    const {date, type, status, giraffeName} = data;
+    const dateFormatter = new DateFormatter();
+    const formattedDate = dateFormatter.format(date);
+    debugger;
+    let statusElem;
+    switch (status) {
+        case SUCCESS:
+            statusElem = <StatusSucces>Выполнено</StatusSucces>;
             break;
-        case 'reject':
-            status = <StatusReject>Отменено</StatusReject>
+        case REJECTED:
+            statusElem = <StatusReject>Отменено</StatusReject>;
             break;
-        case 'pending':
-            status = <StatusPending>В ожидании</StatusPending>
+        case WAITING:
+            statusElem = <StatusPending>В ожидании</StatusPending>;
+            break;
+        case NOT_CONFIRMED:
+            statusElem = <StatusNotConfirmed>Не подтвержден</StatusNotConfirmed>;
             break;
     }
 
     return (
         <tr>
-            <td>01 июня 2020</td>
-            <td>Новый жираф</td>
-            <td>Пряник</td>
-            <td>{status}</td>
+            <td>{formattedDate}</td>
+            <td>{type}</td>
+            <td>{giraffeName}</td>
+            <td>{statusElem}</td>
         </tr>
     );
 }
