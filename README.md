@@ -1,5 +1,5 @@
 ## GIRAFFES FARM
-Pass this test to join the best team in the world
+
 ### INSTALATION
 ```
 git clone (repo url)
