@@ -103,26 +103,26 @@ function EditForm({handleSubmit, initialize, initialValues, image}) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <GiraffName><Field name="name" component="input" type="text"/></GiraffName>
+            <GiraffName><Field name="name" placeholder="Имя" component="input" type="text"/></GiraffName>
             <OptionIcons>
                 <Icon icon={venusIcon}/>
                 <Icon icon={scaleIcon}/>
                 <Icon icon={rulerIcon}/>
             </OptionIcons>
             <HighlitghBlock>
-                <Field name="sex" component="input" type="text"/>
-                <Field name="weight" component="input" type="number"/>
-                <Field name="height" component="input" type="number"/>
+                <Field name="sex" placeholder="пол" component="input" type="text"/>
+                <Field name="weight" placeholder="вес" component="input" type="number"/>
+                <Field name="height" placeholder="рост" component="input" type="number"/>
             </HighlitghBlock>
             <Params>
                 <div>
-                    <span>Цвет:</span> <Field name="color" component="input" type="text"/>
+                    <span>Цвет:</span> <Field name="color" placeholder="цвет" component="input" type="text"/>
                 </div>
                 <div>
-                    <span>Диета:</span> <Field name="diet" component="input" type="text"/>
+                    <span>Диета:</span> <Field name="diet"  placeholder="диета" component="input" type="text"/>
                 </div>
                 <div>
-                    <span>Характер:</span> <Field name="temper" component="input" type="text"/>
+                    <span>Характер:</span> <Field name="temper" placeholder="характер" component="input" type="text"/>
                 </div>
             </Params>
             <Field name='id' component='input' type='hidden'/>

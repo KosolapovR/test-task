@@ -23,36 +23,24 @@ module.exports = (app) => {
     })
 
     // Giraffe API
-    app.post('/api/giraffe', jsonParser, (req, res) => {
+    app.post('/api/giraffe', (req, res) => {
         if (!req.body) return res.sendStatus(400);
 
-        const name = req.body.name;
-        const height = req.body.height;
-        const weight = req.body.weight;
-        const sex = req.body.sex;
-        const color = req.body.color;
-        const diet = req.body.diet;
-        const temper = req.body.temper;
-        const aviary = req.body.aviary;
-        const image = req.body.image;
-
-        console.log('-----------------------', req);
-
         const giraffe = new Giraffe({
-            name,
-            height,
-            weight,
-            sex,
-            color,
-            diet,
-            temper,
-            aviary,
-            image
+            name: req.body.name,
+            sex: req.body.sex,
+            height: req.body.height,
+            weight: req.body.weight,
+            color: req.body.color,
+            diet: req.body.diet,
+            temper: req.body.temper,
+            aviary: req.body.aviary,
+            image: req.body.image,
+            position: req.body.position
         });
 
         giraffe.save(function (err) {
             if (err) return console.log(err);
-            console.log('saved ++++++++++ ', giraffe);
             res.send(giraffe);
         })
     });
@@ -68,37 +56,33 @@ module.exports = (app) => {
         .get((req, res) => {
             const id = req.params.id;
             Giraffe.findById(id, function (err, giraffe) {
-                if(err) res.sendStatus(404);
-                console.log('===================', giraffe);
+                if (err) res.sendStatus(404);
                 res.send(giraffe);
             });
         })
 
         .put((req, res) => {
-            const id = req.body.id;
-            Giraffe.findById(id, function (err, giraffe) {
+            let newGiraffe = new Giraffe({
+                    _id: req.params.id,
+                    name: req.body.name,
+                    sex: req.body.sex,
+                    height: req.body.height,
+                    weight: req.body.weight,
+                    color: req.body.color,
+                    diet: req.body.diet,
+                    temper: req.body.temper,
+                    aviary: req.body.aviary,
+                    image: req.body.image,
+                    position: req.body.position
+                });
 
-                giraffe.name = req.body.name;
-                giraffe.sex = req.body.sex;
-                giraffe.height = req.body.height;
-                giraffe.weight = req.body.weight;
-                giraffe.color = req.body.color;
-                giraffe.diet = req.body.diet;
-                giraffe.temper = req.body.temper;
-                giraffe.aviary = req.body.aviary;
-                giraffe.image = req.body.image;
-
-                console.log('in update: ', req.body.temper);
-
-                giraffe.save(function (err) {
-                    if (err) return console.log(err);
-                    console.log('updated');
-                    res.send(giraffe);
-                })
-                console.log(giraffe);
+            Giraffe.findByIdAndUpdate(req.params.id, newGiraffe, {new: true},function (err, giraffe) {
+                res.send(giraffe);
             });
         })
         .delete((req, res) => {
-
-        })
+            Giraffe.findByIdAndDelete(req.params.id, function (err, giraffe) {
+                res.send(giraffe);
+            });
+        });
 }

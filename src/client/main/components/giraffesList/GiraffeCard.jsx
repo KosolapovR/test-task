@@ -95,9 +95,10 @@ export default function GiraffeCard({ img, data }) {
 
   const handleInfoClick = () => {
     setInfoPopUp(true);
+    setTimeout(() => {setInfoPopUp(false)}, 3000);
   };
 
-  const infoPopUpRef = useRef(null);
+  const infoPopUpRef = useRef();
 
   useEffect(() => {
     //скыритие popUp по клику вне его;
