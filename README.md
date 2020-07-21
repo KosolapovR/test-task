@@ -8,7 +8,7 @@ cd (repo dir)
 
 npm i
 
-npm run dev (or another script)
+npm run dev:win (or dev:unix)
 ```
 
 ### TESTS
